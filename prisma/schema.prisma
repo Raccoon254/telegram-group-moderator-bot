@@ -1,0 +1,50 @@
+// Prisma schema for Telegram Group Guard
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int        @id @default(autoincrement())
+  telegramId  BigInt     @unique @map("telegram_id")
+  username    String?
+  firstName   String?    @map("first_name")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  
+  warning     Warning?
+  violations  Violation[]
+  
+  @@map("users")
+}
+
+model Warning {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @unique @map("user_id")
+  count       Int       @default(0)
+  lastWarning DateTime? @map("last_warning")
+  
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("warnings")
+}
+
+model Violation {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @map("user_id")
+  message       String   @db.Text
+  violationType String   @map("violation_type")
+  actionTaken   String   @map("action_taken")
+  createdAt     DateTime @default(now()) @map("created_at")
+  
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@map("violations")
+  @@index([userId])
+  @@index([createdAt])
+}

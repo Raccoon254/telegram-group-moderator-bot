@@ -15,4 +15,6 @@ coverage/
 
 package-lock.json
 yarn.lock
-pnpm-lock.yaml
+pnpm-lock.yamllogs/
+node_modules/
+.env
