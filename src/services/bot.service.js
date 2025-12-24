@@ -79,7 +79,7 @@ async function handleViolation(msg) {
 
       await bot.sendMessage(
         chatId,
-        `<b>Warning</b>\n${userTag}\nSexual solicitation is not allowed in this group.\n\nNext offense = removal.\n\nGroup Guard • kentom.co.ke`,
+        `<b>Warning 1/2</b>\n${userTag}\nSexual solicitation is not allowed in this group.\n\nYou have 1 more warning before removal.\n\nGroup Guard • kentom.co.ke`,
         { parse_mode: 'HTML' }
       )
 
@@ -96,15 +96,39 @@ async function handleViolation(msg) {
         timestamp: new Date()
       })
 
-      logger.info(`Warning issued to user ${userTag}`)
+      logger.info(`First warning issued to user ${userTag}`)
+    } else if (newWarningCount === 2) {
+      // Second warning (final warning)
+      await logViolation(user.id, text, violationType, ACTIONS.WARNED)
+
+      await bot.sendMessage(
+        chatId,
+        `<b>Final Warning 2/2</b>\n${userTag}\nThis is your last warning.\n\nNext offense = immediate removal.\n\nGroup Guard • kentom.co.ke`,
+        { parse_mode: 'HTML' }
+      )
+
+      // Emit warning event for real-time dashboard
+      violationEmitter.emitWarning({
+        user: {
+          telegramId: msg.from.id.toString(),
+          username: msg.from.username,
+          firstName: msg.from.first_name
+        },
+        message: text,
+        violationType,
+        action: ACTIONS.WARNED,
+        timestamp: new Date()
+      })
+
+      logger.info(`Final warning issued to user ${userTag}`)
     } else {
-      // Ban user
+      // Ban user (3rd violation)
       await bot.banChatMember(chatId, userId)
       await logViolation(user.id, text, violationType, ACTIONS.BANNED)
 
       await bot.sendMessage(
         chatId,
-        `<b>User Removed</b>\n${userTag}\nRepeated sexual solicitation.\n\nGroup Guard • kentom.co.ke`,
+        `<b>User Removed</b>\n${userTag}\nRepeated sexual solicitation after 2 warnings.\n\nGroup Guard • kentom.co.ke`,
         { parse_mode: 'HTML' }
       )
 
@@ -121,7 +145,7 @@ async function handleViolation(msg) {
         timestamp: new Date()
       })
 
-      logger.info(`User ${userTag} banned from group`)
+      logger.info(`User ${userTag} banned from group after 3 violations`)
     }
   } catch (error) {
     logger.error('Error handling violation:', error)
