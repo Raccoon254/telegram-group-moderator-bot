@@ -128,4 +128,4 @@ bot.on('message', async (msg) => {
   }
 })
 
-console.log('🛡️ Group Guard running — https://kentom.co.ke')
+console.log('| Group Guard running — https://kentom.co.ke')
