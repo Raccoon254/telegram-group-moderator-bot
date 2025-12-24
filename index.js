@@ -90,6 +90,8 @@ bot.on('message', async (msg) => {
   const userId = msg.from.id
   const text = msg.text || ''
 
+  console.log(`Message from ${msg.from.username || msg.from.first_name}: ${text}`)
+
   if (!text || msg.from.is_bot) return
 
   try {
