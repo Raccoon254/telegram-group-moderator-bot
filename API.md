@@ -2,6 +2,8 @@
 
 Base URL: `https://telegram-group-moderator-bot.onrender.com`
 
+Live Dashboard: `https://mod7.vercel.app/`
+
 ## Overview
 
 The Group Guard API provides endpoints for accessing moderation data, user statistics, violation logs, and real-time updates for the Telegram Group Guard bot.

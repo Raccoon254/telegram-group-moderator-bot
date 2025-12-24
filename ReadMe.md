@@ -2,6 +2,8 @@
 
 A production-ready Telegram group moderation bot with a live dashboard API. Automatically detects, warns, and removes users who post sexual solicitation, hookup spam, and inappropriate content in Telegram groups.
 
+Live Dashboard: [https://mod7.vercel.app/](https://mod7.vercel.app/)
+
 Created by Kentom - [https://kentom.co.ke](https://kentom.co.ke)
 
 ## Features

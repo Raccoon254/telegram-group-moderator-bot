@@ -79,7 +79,7 @@ async function handleViolation(msg) {
 
       await bot.sendMessage(
         chatId,
-        `<b>Warning 1/2</b>\n${userTag}\nSexual solicitation is not allowed in this group.\n\nYou have 1 more warning before removal.\n\nGroup Guard • kentom.co.ke`,
+        `<b>Warning 1/2</b>\n${userTag}\nSexual solicitation is not allowed in this group.\n\nYou have 1 more warning before removal.\n\n📊 View live dashboard: https://mod7.vercel.app/\n\nGroup Guard • kentom.co.ke`,
         { parse_mode: 'HTML' }
       )
 
@@ -103,7 +103,7 @@ async function handleViolation(msg) {
 
       await bot.sendMessage(
         chatId,
-        `<b>Final Warning 2/2</b>\n${userTag}\nThis is your last warning.\n\nNext offense = immediate removal.\n\nGroup Guard • kentom.co.ke`,
+        `<b>Final Warning 2/2</b>\n${userTag}\nThis is your last warning.\n\nNext offense = immediate removal.\n\n📊 View live dashboard: https://mod7.vercel.app/\n\nGroup Guard • kentom.co.ke`,
         { parse_mode: 'HTML' }
       )
 
@@ -128,7 +128,7 @@ async function handleViolation(msg) {
 
       await bot.sendMessage(
         chatId,
-        `<b>User Removed</b>\n${userTag}\nRepeated sexual solicitation after 2 warnings.\n\nGroup Guard • kentom.co.ke`,
+        `<b>User Removed</b>\n${userTag}\nRepeated sexual solicitation after 2 warnings.\n\n📊 View live dashboard: https://mod7.vercel.app/\n\nGroup Guard • kentom.co.ke`,
         { parse_mode: 'HTML' }
       )
 
