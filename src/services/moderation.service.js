@@ -45,8 +45,8 @@ function isSexualMessage(text = '') {
   if (phone && (intent || media || action)) return true
   if (t.includes('vc') && t.includes('dm')) return true
 
-  // detect SHOTS ama NIGHTSTAND available for any serious guy now
-    if (t.includes('shots') && t.includes('nightstand')) return true
+  // Extra heuristics: treat "shots" combined with these keywords as sexual
+  if (t.includes('shots') && ['nightstand', 'serious guy', 'quickie'].some(k => t.includes(k))) return true
 
   return false
 }
